@@ -123,4 +123,5 @@ go.work
 
 # Pocketbase
 /pocketbase
-/pb_data/logs*
+/pb_data/*
+!/pb_data/data.db

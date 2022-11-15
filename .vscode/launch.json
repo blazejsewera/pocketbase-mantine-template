@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to Process",
+      "type": "go",
+      "request": "attach",
+      "mode": "local",
+      "processId": 0
+    },
+    {
+      "cwd": "${workspaceFolder}/ui",
+      "command": "./node_modules/.bin/astro dev",
+      "name": "Frontend development server",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}

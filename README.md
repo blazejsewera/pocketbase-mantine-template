@@ -5,7 +5,21 @@ and mantine as frontend.
 
 ## Prerequisites
 
-Make, Go `>=1.18` (`>=1.19` on Windows), and Node.js `16.x`.
+- Make:
+  - Linux — should be already installed,
+    if not, install package:
+    [Arch Linux](https://archlinux.org/packages/core/x86_64/make/),
+    [Ubuntu](https://packages.ubuntu.com/search?keywords=make&searchon=names),
+    [Any distro (pkgs.com)](https://pkgs.org/download/make),
+  - macOS — should be already installed,
+    an alternative would be:
+    [GNU Make for macOS](https://formulae.brew.sh/formula/make),
+  - [Windows](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows);
+- [Go](https://go.dev/dl/) `>=1.18` (`>=1.19` on Windows);
+- [Node.js](https://nodejs.org/en/download/) `16.x` or later,
+  - Using a node version manager (nvm) is advised:
+    - [POSIX (Linux/macOS)](https://github.com/nvm-sh/nvm),
+    - [Windows](https://github.com/coreybutler/nvm-windows).
 
 ## Pocketbase
 
