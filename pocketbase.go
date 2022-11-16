@@ -40,7 +40,7 @@ func serveStatic(app *pocketbase.PocketBase) {
 
 func checkForUIDist(path string) error {
 	if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) {
-		return errors.New("not compiled: " + path + " directory not found (try to run `cd ui; yarn build`)")
+		return errors.New("not compiled: " + path + " directory not found (try to run `make build`)")
 	}
 	return nil
 }

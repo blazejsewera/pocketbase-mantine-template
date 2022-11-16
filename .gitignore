@@ -103,6 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+# Yarn lockfile added by accident
+/yarn.lock
+
 # Go
 
 # Binaries for programs and plugins
