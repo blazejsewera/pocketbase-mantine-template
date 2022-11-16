@@ -1,22 +1,25 @@
 import { Note } from '../domain/Note'
-import Pocketbase from 'pocketbase'
+import Pocketbase, { Record } from 'pocketbase'
 import { BACKEND_URL } from '../config'
+import { useStore } from './store'
 
 const client = new Pocketbase(BACKEND_URL)
 
-const fetchData = async () => {
-  return client.records.getList('notes')
-}
+const fromNoteData = (noteData: Record): Note => ({ title: noteData.title, body: noteData.body })
 
-export const fetchNotes = async (): Promise<Note[]> => {
-  const data = await fetchData()
-  return Promise.resolve(data.items.map(noteData => ({ title: noteData.title, body: noteData.body })))
-}
-
-const streamData = () => {
-  return client.realtime.subscribe('notes', () => {
-    // subscribe to zustand update store function
+export const fetchNotes = () => {
+  client.records.getList('notes').then(({ items: notesData }) => {
+    const { setNotes } = useStore.getState()
+    setNotes(notesData.map(fromNoteData))
   })
 }
 
-export const streamNotes = () => {}
+type Action = 'create' | 'update' | 'delete'
+
+export const streamNotes = () => {
+  client.realtime.subscribe('notes', ({ action, record }) => {
+    console.log(`action: ${action}, record: ${record}`)
+    const { addNote } = useStore.getState()
+    addNote(fromNoteData(record))
+  })
+}
