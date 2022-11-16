@@ -4,8 +4,8 @@ const config = {
   testEnvironment: 'node',
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/src/mock/file.mock.ts',
-    '\\.(css|pcss)$': '<rootDir>/src/mock/style.mock.ts',
+      '<rootDir>/src/util/mock/file.mock.ts',
+    '\\.(css|pcss|scss)$': '<rootDir>/src/util/mock/style.mock.ts',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 }
