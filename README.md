@@ -6,7 +6,7 @@ and Astro + React + Mantine combo as frontend.
 
 ## Cheat sheet
 
-- `make` — download all dependencies and set up workspace;
+- `make` — download all dependencies (see [Workspace setup](#workspace-setup) below);
 - `make -j2 d` — full-stack development servers;
 - `make t` — ui component unit tests;
 - `make tu` — ui component update Jest snapshots;
@@ -14,6 +14,7 @@ and Astro + React + Mantine combo as frontend.
 - `make s` — run Pocketbase serving `ui/dist` under `/`;
 - `make a` — run only frontend Astro development server;
 - `make c` — clean all dist files (`ui/dist` and `./pocketbase`).
+
 
 ## Prerequisites
 
@@ -35,6 +36,22 @@ and Astro + React + Mantine combo as frontend.
 
 
 ## Quick start
+
+### Workspace setup
+
+After installing prerequisites, you have to set up the workspace.
+The following commands will download a proper Node.js,
+enable it in the workspace, install [Yarn](https://yarnpkg.com/),
+and download all the dependencies, both for ui and Go.
+
+```sh
+nvm install  # if using nvm
+nvm use      # if using nvm
+npm -g i yarn
+make
+```
+
+### Other commands
 
 The following command will open a dev Astro server
 with hot reload, and a Pocketbase server alongside it.
@@ -109,7 +126,7 @@ or `make c` for short.
 
 ## Further reading
 
-- [Available recipes in Makefile](./Makefile);
+- [The Makefile](./Makefile);
 - [Pocketbase documentation](https://pocketbase.io/docs);
 - [Pocketbase JS/TS SDK](https://github.com/pocketbase/js-sdk);
 - [Astro documentation](https://docs.astro.build/en/getting-started/), especially:
@@ -119,4 +136,11 @@ or `make c` for short.
   - [Routing](https://docs.astro.build/en/core-concepts/routing/),
   - [Page layouts](https://docs.astro.build/en/core-concepts/layouts/),
   - [Project structure](https://docs.astro.build/en/core-concepts/project-structure/);
-- []
+- [Mantine documentation](https://mantine.dev/pages/getting-started/), especially:
+  - [Mantine Core components](https://mantine.dev/core/app-shell/),
+  - [MantineProvider](https://mantine.dev/theming/mantine-provider/) — tl;dr:
+    It is not required if using the default theme,
+  - [Mantine UI component library](https://ui.mantine.dev/);
+- [Jest documentation](https://jestjs.io/docs), especially:
+  - [Getting started](https://jestjs.io/docs/getting-started),
+  - [Snapshot testing](https://jestjs.io/docs/snapshot-testing);
