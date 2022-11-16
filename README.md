@@ -139,6 +139,7 @@ or `make c` for short.
   - [Link component](https://reactrouter.com/en/main/components/link),
   - [Browser router](https://reactrouter.com/en/main/routers/create-browser-router) — tl;dr:
     Add new paths to [main.tsx](./ui/src/main.tsx);
+- [Zustand (store) documentation](https://docs.pmnd.rs/zustand);
 - [Jest documentation](https://jestjs.io/docs), especially:
   - [Getting started](https://jestjs.io/docs/getting-started),
   - [Snapshot testing](https://jestjs.io/docs/snapshot-testing);
