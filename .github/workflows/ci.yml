@@ -26,7 +26,7 @@ jobs:
       # https://github.com/actions/cache/blob/main/examples.md
       - name: Get yarn cache directory path for ui
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(cd ui; yarn config get cacheFolder)"
+        run: echo "dir=$(cd ui; yarn config get cacheFolder)" >> $GITHUB_OUTPUT
 
       - name: Cache yarn dependencies
         id: yarn-cache
