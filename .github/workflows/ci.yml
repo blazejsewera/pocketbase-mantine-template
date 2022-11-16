@@ -1,4 +1,4 @@
-name: Notipie CI
+name: CI Pipeline
 
 on:
   push:
