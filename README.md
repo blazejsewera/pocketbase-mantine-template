@@ -1,7 +1,7 @@
-# Pocketbase, Astro, React, and Mantine template
+# Pocketbase, Vite, React, and Mantine template
 
 Full-stack application template using Pocketbase as backend,
-and Astro + React + Mantine combo as frontend.
+and Vite + React + Mantine combo as frontend.
 
 
 ## Cheat sheet
@@ -12,7 +12,7 @@ and Astro + React + Mantine combo as frontend.
 - `make tu` — ui component update Jest snapshots;
 - `make -j2 b` — build `ui/dist` and Pocketbase simultaneously;
 - `make s` — run Pocketbase serving `ui/dist` under `/`;
-- `make a` — run only frontend Astro development server;
+- `make v` — run only frontend Vite development server;
 - `make c` — clean all dist files (`ui/dist` and `./pocketbase`).
 
 
@@ -53,7 +53,7 @@ make
 
 ### Other commands
 
-The following command will open a dev Astro server
+The following command will open a dev Vite server
 with hot reload, and a Pocketbase server alongside it.
 
 ```sh
@@ -68,7 +68,7 @@ The following will only build and run the Pocketbase executable.
 make pb
 ```
 
-The following will build the static _dist_ Astro package,
+The following will build the static _dist_ Vite package,
 and run a Pocketbase server that serves it under the root path (`/`).
 
 ```sh
@@ -118,7 +118,7 @@ or `make c` for short.
 
 ### Default URLs
 
-- Astro DEV server: <http://localhost:3000/>
+- Vite DEV server: <http://localhost:3000/>
 - Static UI served by Pocketbase: <http://localhost:8090/>
 - REST API: <http://localhost:8090/api/>
 - Admin UI: <http://localhost:8090/_/>
@@ -129,13 +129,7 @@ or `make c` for short.
 - [The Makefile](./Makefile);
 - [Pocketbase documentation](https://pocketbase.io/docs);
 - [Pocketbase JS/TS SDK](https://github.com/pocketbase/js-sdk);
-- [Astro documentation](https://docs.astro.build/en/getting-started/), especially:
-  - [Islands (partial hydration)](https://docs.astro.build/en/concepts/islands/),
-  - [State sharing between islands](https://docs.astro.build/en/core-concepts/sharing-state/),
-  - [Nanostores library](https://github.com/nanostores/nanostores),
-  - [Routing](https://docs.astro.build/en/core-concepts/routing/),
-  - [Page layouts](https://docs.astro.build/en/core-concepts/layouts/),
-  - [Project structure](https://docs.astro.build/en/core-concepts/project-structure/);
+- [Vite configuration documentation](https://vitejs.dev/config/);
 - [Mantine documentation](https://mantine.dev/pages/getting-started/), especially:
   - [Mantine Core components](https://mantine.dev/core/app-shell/),
   - [MantineProvider](https://mantine.dev/theming/mantine-provider/) — tl;dr:

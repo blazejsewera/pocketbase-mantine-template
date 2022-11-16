@@ -7,13 +7,6 @@
       "request": "attach",
       "mode": "local",
       "processId": 0
-    },
-    {
-      "cwd": "${workspaceFolder}/ui",
-      "command": "./node_modules/.bin/astro dev",
-      "name": "Frontend development server",
-      "request": "launch",
-      "type": "node-terminal"
     }
   ]
 }

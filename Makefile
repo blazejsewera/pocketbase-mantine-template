@@ -7,11 +7,11 @@ UI=ui
 DIST=dist
 
 .DEFAULT_GOAL := workspace
-.PHONY: workspace print-help-ui print-help-go start dev pb astro clean build ui-build test test-update s d a c b t tu
+.PHONY: workspace print-help-ui print-help-go start dev pb vite clean build ui-build test test-update s d v c b t tu
 
 s: start
 d: dev
-a: astro
+v: vite
 c: clean
 b: build
 t: test
@@ -51,14 +51,14 @@ deps-go:
 start: build
 	@$(MAKE) pb
 
-dev: pb astro # remember to start with -j2 (`make -j2 dev`)
+dev: pb vite # remember to start with -j2 (`make -j2 dev`)
 
 pb: $(PB_EXE)
 	@echo "> starting $(PB_EXE)"
 	@./$(PB_EXE) serve
 
-astro:
-	@echo "> starting Astro in dev mode"
+vite:
+	@echo "> starting Vite in dev mode"
 	@cd ui; yarn dev
 
 clean:
