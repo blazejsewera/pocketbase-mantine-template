@@ -135,6 +135,10 @@ or `make c` for short.
   - [MantineProvider](https://mantine.dev/theming/mantine-provider/) — tl;dr:
     It is not required if using the default theme,
   - [Mantine UI component library](https://ui.mantine.dev/);
+- [React Router documentation](https://reactrouter.com/en/main), especially:
+  - [Link component](https://reactrouter.com/en/main/components/link),
+  - [Browser router](https://reactrouter.com/en/main/routers/create-browser-router) — tl;dr:
+    Add new paths to [main.tsx](./ui/src/main.tsx);
 - [Jest documentation](https://jestjs.io/docs), especially:
   - [Getting started](https://jestjs.io/docs/getting-started),
   - [Snapshot testing](https://jestjs.io/docs/snapshot-testing);
