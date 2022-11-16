@@ -3809,6 +3809,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pocketbase@npm:^0.7.4":
+  version: 0.7.4
+  resolution: "pocketbase@npm:0.7.4"
+  checksum: c1eebcbc37b8b6b31c2c7bd16aa93599300c1b806e633fd54ad71a4e9a648357ce7edfad84d8862c8bfc1a4977982679e3b41369ed59355d0385ccfbdb97489a
+  languageName: node
+  linkType: hard
+
 "postcss@npm:^8.4.18":
   version: 8.4.19
   resolution: "postcss@npm:8.4.19"
@@ -4516,6 +4523,7 @@ __metadata:
     jest: ^29.3.1
     localforage: ^1.10.0
     match-sorter: ^6.3.1
+    pocketbase: ^0.7.4
     prettier: ^2.7.1
     react: ^18.2.0
     react-dom: ^18.2.0
