@@ -1,25 +1,35 @@
 import { Note } from '../domain/Note'
 import Pocketbase, { Record } from 'pocketbase'
 import { BACKEND_URL } from '../config'
-import { useStore } from './store'
 
 const client = new Pocketbase(BACKEND_URL)
 
-const fromNoteData = (noteData: Record): Note => ({ title: noteData.title, body: noteData.body })
+const fromNoteData = (noteData: Record): Note => ({ id: noteData.id, title: noteData.title, body: noteData.body })
 
-export const fetchNotes = () => {
+export const fetchNotes = (setNotes: (notes: Note[]) => void) => {
   client.records.getList('notes').then(({ items: notesData }) => {
-    const { setNotes } = useStore.getState()
     setNotes(notesData.map(fromNoteData))
   })
 }
 
 type Action = 'create' | 'update' | 'delete'
 
-export const streamNotes = () => {
+export const streamNotes = (
+  addNote: (note: Note) => void,
+  updateNote: (note: Note) => void,
+  deleteNote: (note: Note) => void,
+) => {
   client.realtime.subscribe('notes', ({ action, record }) => {
-    console.log(`action: ${action}, record: ${record}`)
-    const { addNote } = useStore.getState()
-    addNote(fromNoteData(record))
+    const note = fromNoteData(record)
+    switch (action as Action) {
+      case 'create':
+        addNote(note)
+        break
+      case 'update':
+        updateNote(note)
+        break
+      case 'delete':
+        deleteNote(note)
+    }
   })
 }

@@ -5,11 +5,12 @@ import { fetchNotes, streamNotes } from '../data/fetch'
 import { useStore } from '../data/store'
 export const MainPage = () => {
   useEffect(() => {
-    fetchNotes()
-    streamNotes()
+    const { addOrUpdateNote, deleteNote, setNotes } = useStore.getState()
+    fetchNotes(setNotes)
+    streamNotes(addOrUpdateNote, addOrUpdateNote, deleteNote)
   }, [])
 
-  const notes = useStore(state => state.notes)
+  const notes = useStore(state => Object.values(state.notes))
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>

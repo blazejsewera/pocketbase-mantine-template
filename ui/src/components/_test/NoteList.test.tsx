@@ -10,8 +10,8 @@ it('renders list with two elements properly', () => {
   const s = snap(
     <NoteList
       notes={[
-        { title: '1', body: '1' },
-        { title: '2', body: '2' },
+        { id: '1', title: '1', body: '1' },
+        { id: '2', title: '2', body: '2' },
       ]}
     />,
   )

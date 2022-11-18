@@ -6,11 +6,14 @@ import (
 	"os"
 
 	"github.com/pocketbase/pocketbase"
+	"github.com/pocketbase/pocketbase/cmd"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/spf13/cobra"
 )
 
 func main() {
 	app := pocketbase.New()
+	app.RootCmd.AddCommand(serveWithAddrFromJSONCommand(app))
 
 	setLogger()
 	serveStatic(app)
@@ -18,6 +21,12 @@ func main() {
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func serveWithAddrFromJSONCommand(app *pocketbase.PocketBase) *cobra.Command {
+	serve := cmd.NewServeCommand(app, true)
+	serve.PersistentFlags().Set("http", "localhost:8090") // get from config JSON
+	return serve
 }
 
 func setLogger() {

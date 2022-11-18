@@ -17,5 +17,5 @@ export interface NoteListProps {
 }
 
 export const NoteList = ({ notes }: NoteListProps) => (
-  <div>{notes.length ? notes.map(note => <NoteCard key={note.title} {...{ note }} />) : <Text>Empty</Text>}</div>
+  <div>{notes.length ? notes.map(note => <NoteCard key={note.id} {...{ note }} />) : <Text>Empty</Text>}</div>
 )
