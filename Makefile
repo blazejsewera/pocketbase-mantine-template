@@ -68,7 +68,7 @@ dev: pb vite # remember to start with -j2 (`make -j2 dev`)
 
 pb: $(PB_EXE)
 	@echo "> starting $(PB_EXE)"
-	@./$(PB_EXE) serve
+	@./$(PB_EXE) serve-from-config
 
 vite: $(UI)/$(CFG)
 	@echo "> starting Vite in dev mode"

@@ -48,6 +48,8 @@ func NewApp() *App {
 // standard PocketBase with "--http=<host>" flag
 func (a *App) setHostFromJSON() {
 	serve := cmd.NewServeCommand(a, true)
+	serve.Use = "serve-from-config"
+	serve.Short = "Starts the web server from JSON config"
 	serve.PersistentFlags().Set("http", getHostFromJSONOrReturnDefault())
 	a.RootCmd.AddCommand(serve)
 }
@@ -83,10 +85,10 @@ func (a *App) serveStatic() {
 	uiDist := "ui/dist"
 	a.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 		if err := checkForUIDist(uiDist); err != nil {
-			logWarn("ui: " + err.Error())
+			logWarn("ui/dist: " + err.Error())
 			return nil
 		}
-		logInfo("ui: serving at " + staticServePath)
+		logInfo("ui/dist: serving at " + staticServePath)
 		e.Router.Static(staticServePath, uiDist)
 		return nil
 	})
