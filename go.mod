@@ -2,10 +2,7 @@ module github.com/blazejsewera/pocketbase-mantine-template
 
 go 1.19
 
-require (
-	github.com/pocketbase/pocketbase v0.7.10
-	github.com/spf13/cobra v1.5.0
-)
+require github.com/pocketbase/pocketbase v0.7.10
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6 // indirect
@@ -53,6 +50,7 @@ require (
 	github.com/pocketbase/dbx v1.6.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
+	github.com/spf13/cobra v1.5.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect

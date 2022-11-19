@@ -6,18 +6,23 @@ PB_EXE=pocketbase
 UI=ui
 DIST=dist
 
-.DEFAULT_GOAL := workspace
-.PHONY: workspace print-help-ui print-help-go start dev pb vite clean build ui-build test test-update s d v c b t tu
+CFG=app.config.json
+CFG_EXAMPLE=app.config.example.json
 
+.DEFAULT_GOAL := workspace
+.PHONY: workspace print-help-ui print-help-go deps copy-example-config start dev pb vite clean-config clean build ui-build test test-update cp s d v cc c b t tu
+
+cp: copy-example-config
 s: start
 d: dev
 v: vite
+cc: clean-config
 c: clean
 b: build
 t: test
 tu: test-update
 
-workspace: print-help-ui print-help-go deps
+workspace: print-help-ui print-help-go deps copy-example-config
 
 print-help-ui:
 ifneq ($(NVM_DIR),"")
@@ -48,6 +53,14 @@ deps-go:
 	@go mod download
 	@echo "> deps for go installed"
 
+copy-example-config: $(CFG) $(UI)/$(CFG)
+
+$(CFG):
+	@cp $(CFG_EXAMPLE) $(CFG)
+
+$(UI)/$(CFG): $(CFG)
+	@cd $(UI); ln -s ../$(CFG) ./$(CFG)
+
 start: build
 	@$(MAKE) pb
 
@@ -57,9 +70,12 @@ pb: $(PB_EXE)
 	@echo "> starting $(PB_EXE)"
 	@./$(PB_EXE) serve
 
-vite:
+vite: $(UI)/$(CFG)
 	@echo "> starting Vite in dev mode"
 	@cd ui; yarn dev
+
+clean-config:
+	@rm -f $(CFG) $(UI)/$(CFG)
 
 clean:
 	@rm -f $(PB_EXE)
@@ -72,7 +88,7 @@ $(PB_EXE): $(PB_SRC)
 	@go build -o $(PB_EXE) $(PB_SRC)
 	@echo "> $(PB_EXE) built"
 
-ui-build:
+ui-build: $(UI)/$(CFG)
 	@cd ui; yarn build
 	@echo "> $(UI)/$(DIST) built"
 

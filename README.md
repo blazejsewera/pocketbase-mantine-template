@@ -13,6 +13,8 @@ and Vite + React + Mantine combo as frontend.
 - `make -j2 b` — build `ui/dist` and Pocketbase simultaneously;
 - `make s` — run Pocketbase serving `ui/dist` under `/`;
 - `make v` — run only frontend Vite development server;
+- `make cp` — copies example config to a working copy and links it to ui;
+- `make cc` — cleans all working config files;
 - `make c` — clean all dist files (`ui/dist` and `./pocketbase`).
 
 
@@ -101,6 +103,23 @@ make test-update
 
 or `make tu` for short.
 
+To copy an example config file (`app.config.example.json` to `app.config.json`),
+which contains the backend (Pocketbase) host, run:
+
+```sh
+make copy-example-config
+```
+
+or `make cp` for short.
+
+To clean all working config files, run:
+
+```sh
+make clean-config
+```
+
+or `make cc` for short.
+
 To clean all dist files, i.e.: `ui/dist` and `./pocketbase`, run:
 
 ```sh
@@ -122,6 +141,10 @@ or `make c` for short.
 - Static UI served by Pocketbase: <http://localhost:8090/>
 - REST API: <http://localhost:8090/api/>
 - Admin UI: <http://localhost:8090/_/>
+
+The Pocketbase URL can be configured in `app.config.json`.
+Both backend and frontend will respect this configuration.
+See also `make copy-example-config` recipe.
 
 
 ## Further reading

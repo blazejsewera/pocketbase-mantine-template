@@ -128,3 +128,5 @@ go.work
 /pocketbase
 /pb_data/*
 !/pb_data/data.db
+
+/app.config.json

@@ -32,3 +32,5 @@ dist-ssr
 !.yarn/versions
 
 .jest-test-results.json
+
+/app.config.json

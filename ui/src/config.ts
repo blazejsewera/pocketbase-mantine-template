@@ -1,1 +1,3 @@
-export const BACKEND_URL = 'http://127.0.0.1:8090' // get from configuration JSON
+import { pbHost } from '../app.config.json'
+
+export const BACKEND_URL = `http://${pbHost}` || 'http://localhost:8090'

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"log"
 	"os"
@@ -8,35 +9,79 @@ import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/cmd"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/spf13/cobra"
 )
 
 func main() {
-	app := pocketbase.New()
-	app.RootCmd.AddCommand(serveWithAddrFromJSONCommand(app))
-
 	setLogger()
-	serveStatic(app)
 
+	app := NewApp()
+	app.setHostFromJSON()
+	app.serveStatic()
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
 	}
-}
-
-func serveWithAddrFromJSONCommand(app *pocketbase.PocketBase) *cobra.Command {
-	serve := cmd.NewServeCommand(app, true)
-	serve.PersistentFlags().Set("http", "localhost:8090") // get from config JSON
-	return serve
 }
 
 func setLogger() {
 	log.Default().SetFlags(0)
 }
 
-func serveStatic(app *pocketbase.PocketBase) {
+func logWarn(msg string) {
+	log.Default().Println(">> warn: " + msg)
+}
+
+func logInfo(msg string) {
+	log.Default().Println(">> info: " + msg)
+}
+
+type App struct {
+	*pocketbase.PocketBase
+}
+
+func NewApp() *App {
+	return &App{
+		PocketBase: pocketbase.New(),
+	}
+}
+
+// setHostFromJSON is equivalent to running
+// standard PocketBase with "--http=<host>" flag
+func (a *App) setHostFromJSON() {
+	serve := cmd.NewServeCommand(a, true)
+	serve.PersistentFlags().Set("http", getHostFromJSONOrReturnDefault())
+	a.RootCmd.AddCommand(serve)
+}
+
+func getHostFromJSONOrReturnDefault() string {
+	file := "app.config.json"
+
+	warnAndReturnDefault := func() string {
+		defaultHost := "localhost:8090"
+		logWarn("cannot read " + file + ", falling back to default host: " + defaultHost + ".")
+		return defaultHost
+	}
+
+	data, err := os.ReadFile(file)
+	if err != nil {
+		return warnAndReturnDefault()
+	}
+
+	var config *struct {
+		PBHost string `json:"pbHost"`
+	}
+	err = json.Unmarshal(data, &config)
+	if err != nil {
+		return warnAndReturnDefault()
+	}
+	return config.PBHost
+}
+
+// serveStatic serves the compiled ui files
+// from "ui/dist" on the root path ("/")
+func (a *App) serveStatic() {
 	staticServePath := "/"
 	uiDist := "ui/dist"
-	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
+	a.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 		if err := checkForUIDist(uiDist); err != nil {
 			logWarn("ui: " + err.Error())
 			return nil
@@ -52,12 +97,4 @@ func checkForUIDist(path string) error {
 		return errors.New("not compiled: " + path + " directory not found (try to run `make build`)")
 	}
 	return nil
-}
-
-func logWarn(msg string) {
-	log.Default().Println(">> warn: " + msg)
-}
-
-func logInfo(msg string) {
-	log.Default().Println(">> info: " + msg)
 }
