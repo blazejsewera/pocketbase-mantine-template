@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/pocketbase/pocketbase"
+	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/cmd"
 	"github.com/pocketbase/pocketbase/core"
 )
@@ -81,7 +82,7 @@ func getHostFromJSONOrReturnDefault() string {
 // serveStatic serves the compiled ui files
 // from "ui/dist" on the root path ("/")
 func (a *App) serveStatic() {
-	staticServePath := "/"
+	staticServePath := "/*"
 	uiDist := "ui/dist"
 	a.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 		if err := checkForUIDist(uiDist); err != nil {
@@ -89,7 +90,7 @@ func (a *App) serveStatic() {
 			return nil
 		}
 		logInfo("ui/dist: serving at " + staticServePath)
-		e.Router.Static(staticServePath, uiDist)
+		e.Router.GET(staticServePath, apis.StaticDirectoryHandler(os.DirFS(uiDist), true))
 		return nil
 	})
 }
